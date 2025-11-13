@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Reserva</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+    <h2>Editar Reserva</h2>
+
+    <form th:action="@{/actualizar-reserva}" th:object="${reserva}" method="post">
+        <input type="hidden" th:field="*{idReserva}" />
+
+        <label>Nombre del Cliente:</label>
+        <input type="text" th:field="*{nombreCliente}" required><br>
+
+        <label>Fecha Check-in:</label>
+        <input type="date" th:field="*{fechaEntrada}" required><br>
+
+        <label>Fecha Check-out:</label>
+        <input type="date" th:field="*{fechaSalida}" required><br>
+
+        <label>Estado de la Reserva:</label>
+        <input type="text" th:field="*{estadoReserva}" required><br>
+
+        <label>Precio Total:</label>
+        <input type="number" th:field="*{precioTotal}" step="0.01" required><br>
+
+        <label>Total de Huéspedes:</label>
+        <input type="number" th:field="*{totalHuespedes}" required><br>
+
+        <label>ID Usuario:</label>
+        <input type="number" th:field="*{idUsuario}" required><br>
+
+        <label>ID Habitación:</label>
+        <input type="number" th:field="*{idHabitacion}" required><br>
+
+        <button type="submit">Actualizar Reserva</button>
+    </form>
+</body>
+</html>

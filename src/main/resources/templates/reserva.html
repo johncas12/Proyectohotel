@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Reserva</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+    <link rel="stylesheet" th:href="@{/css/formulario-reserva.css}">
+    <link rel="stylesheet" th:href="@{/css/lista-reservas.css}">
+
+
+</head>
+<body>
+    <h2>Formulario de Reserva</h2>
+    
+
+    <form th:action="@{/procesar-reserva}" th:object="${reserva}" method="post">
+        <label>Fecha Check-in:</label>
+        <input type="date" th:field="*{fechaCheckin}" required><br>
+
+        <label>Fecha Check-out:</label>
+        <input type="date" th:field="*{fechaCheckout}" required><br>
+
+        <label>Total de Huéspedes:</label>
+        <input type="number" th:field="*{totalHuespedes}" required><br>
+
+        <label>Precio Total:</label>
+        <input type="number" th:field="*{precioTotal}" step="0.01" required><br>
+
+        <label>Estado de la Reserva:</label>
+        <input type="text" th:field="*{estadoReserva}" required><br>
+
+        <label>Notas:</label>
+        <textarea th:field="*{notas}"></textarea><br>
+
+        <button type="submit">Confirmar Reserva</button>
+    </form>
+    <form action="/reservas/procesar" method="post"></form>
+
+    <div th:if="${param.error}" style="color:red;">
+  Debes seleccionar usuario y habitación.
+</div>
+
+</body>
+</html>

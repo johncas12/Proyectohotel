@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Reserva - Hotel El Sol</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <h2>¡Reserva Confirmada!</h2>
+
+    <form>
+        <!-- Datos del cliente -->
+        <label for="nombreCliente">Nombre del Cliente:</label>
+        <input type="text" id="nombreCliente" th:value="${reserva.nombreCliente}" readonly>
+
+        <label for="fechaEntrada">Fecha de Entrada:</label>
+        <input type="date" id="fechaEntrada" th:value="${reserva.fechaEntrada}" readonly>
+
+        <label for="fechaSalida">Fecha de Salida:</label>
+        <input type="date" id="fechaSalida" th:value="${reserva.fechaSalida}" readonly>
+
+        <!-- Detalles de paquete y pago -->
+        <label for="paqueteElegido">Paquete Elegido:</label>
+        <input type="text" id="paqueteElegido" th:value="${reserva.paqueteElegido}" readonly>
+
+        <label for="metodoPago">Método de Pago:</label>
+        <input type="text" id="metodoPago" th:value="${reserva.metodoPago}" readonly>
+
+        <label for="numeroTarjeta">Número de Tarjeta:</label>
+        <input type="text" id="numeroTarjeta" th:value="${reserva.numeroTarjeta}" readonly>
+
+        <!-- Información de reserva -->
+        <label for="estadoReserva">Estado de la Reserva:</label>
+        <input type="text" id="estadoReserva" th:value="${reserva.estadoReserva}" readonly>
+
+        <label for="precioTotal">Precio Total:</label>
+        <input type="text" id="precioTotal" th:value="${reserva.precioTotal}" readonly>
+
+        <label for="totalHuespedes">Total de Huéspedes:</label>
+        <input type="number" id="totalHuespedes" th:value="${reserva.totalHuespedes}" readonly>
+
+        <label for="idUsuario">ID de Usuario:</label>
+        <input type="text" id="idUsuario" th:value="${reserva.idUsuario}" readonly>
+
+        <label for="idHabitacion">ID de Habitación:</label>
+        <input type="text" id="idHabitacion" th:value="${reserva.idHabitacion}" readonly>
+    </form>
+</body>
+</html>

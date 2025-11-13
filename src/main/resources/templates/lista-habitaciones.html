@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Habitaciones</title>
+    <link rel="stylesheet" th:href="@{/css/lista-habitaciones.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Habitaciones</h1>
+    <a th:href="@{/habitaciones/formulario}">Nueva habitación</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Capacidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="habitacion : ${habitaciones}">
+                <td th:text="${habitacion.numeroHabitacion}"></td>
+                <td th:text="${habitacion.tipo}"></td>
+                <td th:text="${habitacion.estado}"></td>
+                <td th:text="${habitacion.capacidad}"></td>
+                <td th:text="${habitacion.precioNoche}"></td>
+                <td>
+                    <a th:href="@{'/habitaciones/editar/' + ${habitacion.idHabitacion}}">Editar</a>
+                    <a th:href="@{'/habitaciones/eliminar/' + ${habitacion.idHabitacion}}"
+                       onclick="return confirm('¿Eliminar esta habitación?')">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
