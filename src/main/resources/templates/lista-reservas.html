@@ -1,48 +1,45 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Reservas - Hotel El Sol</title>
-    <link rel="stylesheet" href="/css/estilos.css">
+    <title>Lista de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/lista-reservas.css}">
 </head>
 <body>
-    <h2>Reservas Registradas</h2>
+<div class="container">
+    <h1>Reservas registradas</h1>
+
+    <!-- Botón para crear nueva reserva -->
+    <a th:href="@{/reservas/formulario}" class="btn btn-primary">Crear nueva reserva</a>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Cliente</th>
+                <th>Usuario</th>
+                <th>Habitación</th>
                 <th>Check-in</th>
                 <th>Check-out</th>
                 <th>Estado</th>
-                <th>Precio</th>
-                <th>Huéspedes</th>
-                <th>Usuario</th>
-                <th>Habitación</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="reserva : ${reservas}">
                 <td th:text="${reserva.idReserva}"></td>
-                <td th:text="${reserva.nombreCliente}"></td>
-                <td th:text="${reserva.fechaEntrada}"></td>
-                <td th:text="${reserva.fechaSalida}"></td>
+                <td th:text="${reserva.usuario.nombre + ' ' + reserva.usuario.apellido}"></td>
+                <td th:text="${reserva.habitacion.numeroHabitacion}"></td>
+                <td th:text="${#dates.format(reserva.fechaCheckin, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(reserva.fechaCheckout, 'dd/MM/yyyy')}"></td>
                 <td th:text="${reserva.estadoReserva}"></td>
-                <td th:text="${reserva.precioTotal}"></td>
-                <td th:text="${reserva.totalHuespedes}"></td>
-                <td th:text="${reserva.idUsuario}"></td>
-                <td th:text="${reserva.idHabitacion}"></td>
                 <td>
-               
-                    <a th:href="@{'/editar-reserva/' + ${reserva.idReserva}}" class="boton">Editar</a>
-                    <a th:href="@{'/eliminar-reserva/' + ${reserva.idReserva}}" class="boton eliminar">Eliminar</a>
-                    <a th:href="@{'/reservas/editar/' + ${reserva.idReserva}}">Editar</a>
-                    <a th:href="@{'/reservas/eliminar/' + ${reserva.idReserva}}" onclick="return confirm('¿Estás segura de eliminar esta reserva?')">Eliminar</a>
+                    <a th:href="@{'/reservas/editar/' + ${reserva.idReserva}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'/reservas/eliminar/' + ${reserva.idReserva}}" class="btn btn-danger"
+                       onclick="return confirm('¿Estás segura de que deseas eliminar esta reserva?');">Eliminar</a>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
 </body>
 </html>

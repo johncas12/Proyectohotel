@@ -23,6 +23,8 @@ public class Habitacion {
     @Column(name = "tipo")
     private String tipo;
 
+    @Column(name = "estado")
+    private String estado; // disponible, ocupada, mantenimiento
 
     // Getters y setters
 
@@ -58,9 +60,25 @@ public class Habitacion {
         this.precioNoche = precioNoche;
     }
 
-    // Opcional: toString para mostrar en el formulario
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    // toString para mostrar en formularios
     @Override
     public String toString() {
-        return numeroHabitacion + " - Capacidad: " + capacidad;
+        return numeroHabitacion + " - " + tipo + " - $" + precioNoche;
     }
 }

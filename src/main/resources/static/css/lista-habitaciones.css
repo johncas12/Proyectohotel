@@ -24,14 +24,14 @@ a {
     display: inline-block;
     margin-bottom: 20px;
     padding: 10px 15px;
-    background-color: #28a745;
+    background-color: #ee4b22;
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
 a:hover {
-    background-color: #218838;
+    background-color: #8fc79b;
 }
 
 table {
@@ -52,7 +52,7 @@ th {
 
 td a {
     margin-right: 10px;
-    color: #007bff;
+    color: #1b74d3;
     text-decoration: none;
 }
 

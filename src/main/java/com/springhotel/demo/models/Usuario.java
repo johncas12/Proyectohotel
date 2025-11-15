@@ -36,6 +36,11 @@ public class Usuario {
     @Column(name = "correo")
     private String correo;
 
+    @Override
+    public String toString() {
+    return String.valueOf(id);
+}
+
     // ✅ Constructores
     public Usuario() {}
 

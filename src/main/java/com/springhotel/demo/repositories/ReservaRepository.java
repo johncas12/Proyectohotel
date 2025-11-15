@@ -10,3 +10,4 @@ import com.springhotel.demo.models.Reserva;
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     // Listo: Spring crea automáticamente los métodos CRUD (save, findById, etc.)
 }
+

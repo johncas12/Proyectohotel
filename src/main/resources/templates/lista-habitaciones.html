@@ -7,7 +7,7 @@
 <body>
 <div class="container">
     <h1>Lista de Habitaciones</h1>
-    <a th:href="@{/habitaciones/formulario}">Nueva habitación</a>
+    <a th:href="@{/habitaciones/formulario}" class="btn-nueva">+ Nueva habitación</a>
     <table>
         <thead>
             <tr>
@@ -25,7 +25,7 @@
                 <td th:text="${habitacion.tipo}"></td>
                 <td th:text="${habitacion.estado}"></td>
                 <td th:text="${habitacion.capacidad}"></td>
-                <td th:text="${habitacion.precioNoche}"></td>
+                <td th:text="'$' + ${#numbers.formatDecimal(habitacion.precioNoche, 1, 'POINT', 2, 'POINT')}"></td>
                 <td>
                     <a th:href="@{'/habitaciones/editar/' + ${habitacion.idHabitacion}}">Editar</a>
                     <a th:href="@{'/habitaciones/eliminar/' + ${habitacion.idHabitacion}}"

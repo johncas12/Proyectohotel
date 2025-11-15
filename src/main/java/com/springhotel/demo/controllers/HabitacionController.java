@@ -42,6 +42,8 @@ public class HabitacionController {
 
     @GetMapping("/eliminar/{id}")
     public String eliminarHabitacion(@PathVariable Long id) {
+        habitacionRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("ID inválido"));
         habitacionRepository.deleteById(id);
         return "redirect:/habitaciones/lista";
     }

@@ -1,8 +1,10 @@
 package com.springhotel.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "reservas")
@@ -33,6 +35,7 @@ public class Reserva {
     @Column(name = "precio_total")
     private double precioTotal;
 
+    @NotNull
     @Column(name = "estado_reserva")
     private String estadoReserva;
 
@@ -42,118 +45,63 @@ public class Reserva {
     @Column(name = "notas")
     private String notas;
 
-    @Column(name = "fecha_llegada")
-    private LocalDate fechaLlegada;
+    // Constructor vacío obligatorio para JPA
+    public Reserva() {}
 
-    @Column(name = "fecha_salida")
-    private LocalDate fechaSalida;
+    // Constructor completo (opcional para pruebas o carga manual)
+    public Reserva(Usuario usuario, Habitacion habitacion, LocalDate fechaCheckin, LocalDate fechaCheckout,
+                   int totalHuespedes, double precioTotal, String estadoReserva, String notas) {
+        this.usuario = usuario;
+        this.habitacion = habitacion;
+        this.fechaCheckin = fechaCheckin;
+        this.fechaCheckout = fechaCheckout;
+        this.totalHuespedes = totalHuespedes;
+        this.precioTotal = precioTotal;
+        this.estadoReserva = estadoReserva;
+        this.notas = notas;
+        this.fechaReserva = LocalDateTime.now();
+    }
 
-    @Column(name = "id_cliente")
-    private Long idCliente;
+    // Inicializa fechaReserva automáticamente al guardar
+    @PrePersist
+    protected void onCreate() {
+        this.fechaReserva = LocalDateTime.now();
+    }
 
     // Getters y Setters
+    public Long getIdReserva() { return idReserva; }
+    public void setIdReserva(Long idReserva) { this.idReserva = idReserva; }
 
-    public Long getIdReserva() {
-        return idReserva;
-    }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
-    public void setIdReserva(Long idReserva) {
-        this.idReserva = idReserva;
-    }
+    public Habitacion getHabitacion() { return habitacion; }
+    public void setHabitacion(Habitacion habitacion) { this.habitacion = habitacion; }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+    public LocalDate getFechaCheckin() { return fechaCheckin; }
+    public void setFechaCheckin(LocalDate fechaCheckin) { this.fechaCheckin = fechaCheckin; }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    public LocalDate getFechaCheckout() { return fechaCheckout; }
+    public void setFechaCheckout(LocalDate fechaCheckout) { this.fechaCheckout = fechaCheckout; }
 
-    public Habitacion getHabitacion() {
-        return habitacion;
-    }
+    public int getTotalHuespedes() { return totalHuespedes; }
+    public void setTotalHuespedes(int totalHuespedes) { this.totalHuespedes = totalHuespedes; }
 
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
-    }
+    public double getPrecioTotal() { return precioTotal; }
+    public void setPrecioTotal(double precioTotal) { this.precioTotal = precioTotal; }
 
-    public LocalDate getFechaCheckin() {
-        return fechaCheckin;
-    }
+    public String getEstadoReserva() { return estadoReserva; }
+    public void setEstadoReserva(String estadoReserva) { this.estadoReserva = estadoReserva; }
 
-    public void setFechaCheckin(LocalDate fechaCheckin) {
-        this.fechaCheckin = fechaCheckin;
-    }
+    public LocalDateTime getFechaReserva() { return fechaReserva; }
+    public void setFechaReserva(LocalDateTime fechaReserva) { this.fechaReserva = fechaReserva; }
 
-    public LocalDate getFechaCheckout() {
-        return fechaCheckout;
-    }
+    public String getNotas() { return notas; }
+    public void setNotas(String notas) { this.notas = notas; }
 
-    public void setFechaCheckout(LocalDate fechaCheckout) {
-        this.fechaCheckout = fechaCheckout;
-    }
-
-    public int getTotalHuespedes() {
-        return totalHuespedes;
-    }
-
-    public void setTotalHuespedes(int totalHuespedes) {
-        this.totalHuespedes = totalHuespedes;
-    }
-
-    public double getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public void setPrecioTotal(double precioTotal) {
-        this.precioTotal = precioTotal;
-    }
-
-    public String getEstadoReserva() {
-        return estadoReserva;
-    }
-
-    public void setEstadoReserva(String estadoReserva) {
-        this.estadoReserva = estadoReserva;
-    }
-
-    public LocalDateTime getFechaReserva() {
-        return fechaReserva;
-    }
-
-    public void setFechaReserva(LocalDateTime fechaReserva) {
-        this.fechaReserva = fechaReserva;
-    }
-
-    public String getNotas() {
-        return notas;
-    }
-
-    public void setNotas(String notas) {
-        this.notas = notas;
-    }
-
-    public LocalDate getFechaLlegada() {
-        return fechaLlegada;
-    }
-
-    public void setFechaLlegada(LocalDate fechaLlegada) {
-        this.fechaLlegada = fechaLlegada;
-    }
-
-    public LocalDate getFechaSalida() {
-        return fechaSalida;
-    }
-
-    public void setFechaSalida(LocalDate fechaSalida) {
-        this.fechaSalida = fechaSalida;
-    }
-
-    public Long getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
+    // toString para facilitar binding en formularios
+    @Override
+    public String toString() {
+        return String.valueOf(idReserva);
     }
 }
