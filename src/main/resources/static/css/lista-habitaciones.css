@@ -31,7 +31,7 @@ a {
 }
 
 a:hover {
-    background-color: #8fc79b;
+    background-color: #e6ebe7;
 }
 
 table {
@@ -46,13 +46,13 @@ th, td {
 }
 
 th {
-    background-color: #f8f9fa;
+    background-color: #e9ecee;
     font-weight: bold;
 }
 
 td a {
     margin-right: 10px;
-    color: #1b74d3;
+    color: #e7eaec;
     text-decoration: none;
 }
 

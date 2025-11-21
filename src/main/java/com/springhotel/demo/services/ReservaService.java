@@ -1,57 +1,42 @@
 package com.springhotel.demo.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.springhotel.demo.models.Reserva;
-import com.springhotel.demo.models.Usuario;
-import com.springhotel.demo.models.Habitacion;
 import com.springhotel.demo.repositories.ReservaRepository;
-import com.springhotel.demo.repositories.UsuarioRepository;
-import com.springhotel.demo.repositories.HabitacionRepository;
-
-import java.time.LocalDateTime;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.NoSuchElementException; // Necesario para la excepción de 'obtenerPorId'
 
 @Service
 public class ReservaService {
 
-    @Autowired
-    private ReservaRepository reservaRepository;
+    private final ReservaRepository reservaRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    // Inyección de Dependencia por Constructor. 
+    // Esto elimina la necesidad de 'import org.springframework.beans.factory.annotation.Autowired'
+    public ReservaService(ReservaRepository reservaRepository) {
+        this.reservaRepository = reservaRepository;
+    }
 
-    @Autowired
-    private HabitacionRepository habitacionRepository;
+    // 1. Método CORREGIDO: Renombrado de 'listar()' a 'listarTodas()'
+    public List<Reserva> listarTodas() {
+        return reservaRepository.findAll();
+    }
 
-    public void guardarReserva(Reserva reserva) {
-        // Asignación temporal para cumplir con la estructura de la BD
+    // Método para guardar o actualizar una reserva
+    public Reserva guardar(Reserva reserva) {
+        return reservaRepository.save(reserva);
+    }
 
-        if (reserva.getUsuario() == null) {
-            Usuario usuarioPorDefecto = usuarioRepository.findById(1L).orElse(null);
-            reserva.setUsuario(usuarioPorDefecto);
-        }
+    // 2. Método CORREGIDO: Renombrado de 'obtener(Long id)' a 'obtenerPorId(Long id)'
+    // Esto elimina la advertencia de 'import java.util.Optional' si se usa orElseThrow
+    public Reserva obtenerPorId(Long id) {
+        return reservaRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Reserva no encontrada con ID: " + id)
+        );
+    }
 
-        if (reserva.getHabitacion() == null) {
-            Habitacion habitacionPorDefecto = habitacionRepository.findById(101L).orElse(null);
-            reserva.setHabitacion(habitacionPorDefecto);
-        }
-
-        if (reserva.getPrecioTotal() <= 0) {
-            reserva.setPrecioTotal(150.00);
-        }
-
-        if (reserva.getEstadoReserva() == null || reserva.getEstadoReserva().isBlank()) {
-            reserva.setEstadoReserva("Pendiente");
-        }
-
-        if (reserva.getTotalHuespedes() <= 0) {
-            reserva.setTotalHuespedes(1);
-        }
-
-        if (reserva.getFechaReserva() == null) {
-            reserva.setFechaReserva(LocalDateTime.now());
-        }
-
-        reservaRepository.save(reserva);
+    // Método para eliminar una reserva
+    public void eliminar(Long id) {
+        reservaRepository.deleteById(id);
     }
 }

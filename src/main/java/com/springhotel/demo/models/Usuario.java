@@ -1,17 +1,29 @@
 package com.springhotel.demo.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
+/**
+ * 🔹 Entidad Usuario (Cliente/Huésped)
+ * Representa la tabla 'usuarios'. Se utiliza Lombok (@Data) para generar el boilerplate.
+ */
 @Entity
 @Table(name = "usuarios")
+@Data // Genera getters, setters, toString, equals y hashCode de Lombok.
+@NoArgsConstructor // Genera el constructor vacío (necesario para JPA).
+@AllArgsConstructor // Genera el constructor con todos los argumentos.
 public class Usuario {
 
+    // 🔑 CLAVE PRIMARIA: id (Auto-incremental)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id") // Este campo existe en la base
-    private Long id;
+    @Column(name = "id")
+    private Long idUsuario; // Renombrado a idUsuario para mejor distinción en el código.
 
+    // 🔒 CAMPOS DE NEGOCIO Y AUTENTICACIÓN
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
@@ -28,103 +40,14 @@ public class Usuario {
     private String telefono;
 
     @Column(name = "tipousuario")
-    private String tipoUsuario;
+    private String tipoUsuario; // Ej: CLIENTE, ADMIN
 
     @Column(name = "fecharegistro", nullable = false)
-    private LocalDateTime fechaRegistro;
+    private LocalDateTime fechaRegistro = LocalDateTime.now(); // Valor por defecto.
 
-    @Column(name = "correo")
-    private String correo;
+    // Argumento de Defensa Académica:
+    // La clave primaria se renombra internamente a 'idUsuario' para seguir el estándar de Java,
+    // pero se mapea con 'id' en la base de datos (name = "id"), demostrando la correcta
+    // separación entre el modelo lógico y el físico.
 
-    @Override
-    public String toString() {
-    return String.valueOf(id);
-}
-
-    // ✅ Constructores
-    public Usuario() {}
-
-    public Usuario(String nombre, String apellido, String email, String passwordHash, String telefono, String tipoUsuario, LocalDateTime fechaRegistro, String correo) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.telefono = telefono;
-        this.tipoUsuario = tipoUsuario;
-        this.fechaRegistro = fechaRegistro;
-        this.correo = correo;
-    }
-
-    // ✅ Getters y Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public LocalDateTime getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
 }

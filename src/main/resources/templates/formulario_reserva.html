@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reserva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">
+                            <span th:if="${reserva.idReserva == null}">Nueva Reserva</span>
+                            <span th:if="${reserva.idReserva != null}">Editar Reserva #<span th:text="${reserva.idReserva}"></span></span>
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                            <strong>Error:</strong> <span th:text="${errorMessage}"></span>
+                        </div>
+
+                        <form th:action="@{/reservas/procesar}" th:object="${reserva}" method="post">
+                            
+                            <input type="hidden" th:field="*{idReserva}" />
+
+                            <div class="mb-3">
+                                <label for="usuario" class="form-label">Usuario *</label>
+                                <select class="form-select" id="usuario" th:field="*{usuario.idUsuario}" required>
+                                    <option value="">Seleccione un usuario</option>
+                                    <option th:each="usuario : ${usuarios}" 
+                                            th:value="${usuario.idUsuario}" 
+                                            th:text="${usuario.nombre + ' ' + usuario.apellido + ' (' + usuario.email + ')'}"
+                                            th:selected="${reserva.usuario != null && reserva.usuario.idUsuario == usuario.idUsuario}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="habitacion" class="form-label">Habitación *</label>
+                                <select class="form-select" id="habitacion" th:field="*{habitacion.idHabitacion}" required>
+                                    <option value="">Seleccione una habitación</option>
+                                    <option th:each="habitacion : ${habitaciones}" 
+                                            th:value="${habitacion.idHabitacion}" 
+                                            th:text="${'Habitación ' + habitacion.numeroHabitacion + ' - ' + habitacion.tipo + ' ($' + #numbers.formatDecimal(habitacion.precioNoche, 1, 'POINT', 2, 'POINT') + '/noche)'}"
+                                            th:selected="${reserva.habitacion != null && reserva.habitacion.idHabitacion == habitacion.idHabitacion}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="fechaCheckin" class="form-label">Fecha de Check-in *</label>
+                                <input type="date" class="form-control" id="fechaCheckin" th:field="*{fechaCheckin}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="fechaCheckout" class="form-label">Fecha de Check-out *</label>
+                                <input type="date" class="form-control" id="fechaCheckout" th:field="*{fechaCheckout}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="totalHuespedes" class="form-label">Total Huéspedes *</label>
+                                <input type="number" class="form-control" id="totalHuespedes" th:field="*{totalHuespedes}" required min="1">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="precioTotal" class="form-label">Precio Total</label>
+                                <input type="number" step="0.01" class="form-control" id="precioTotal" th:field="*{precioTotal}" placeholder="0.00">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="estadoReserva" class="form-label">Estado de la Reserva</label>
+                                <select class="form-select" id="estadoReserva" th:field="*{estadoReserva}">
+                                     <option value="Pendiente">Pendiente</option>
+                                     <option value="Confirmada">Confirmada</option>
+                                     <option value="Cancelada">Cancelada</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/reservas/lista}" class="btn btn-secondary"> Cancelar </a>
+                                <button type="submit" class="btn btn-primary"> Guardar Reserva </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

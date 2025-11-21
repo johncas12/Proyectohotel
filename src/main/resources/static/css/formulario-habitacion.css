@@ -1,3 +1,4 @@
+/* 🌐 Estilo base del documento */
 body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #f4f6f8;
@@ -5,6 +6,7 @@ body {
     padding: 0;
 }
 
+/* 📦 Contenedor principal del formulario */
 .container {
     max-width: 600px;
     margin: 40px auto;
@@ -14,12 +16,14 @@ body {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
+/* 🧭 Título del formulario */
 h1 {
     text-align: center;
     color: #333333;
     margin-bottom: 25px;
 }
 
+/* 🏷️ Etiquetas de los campos */
 label {
     display: block;
     margin-top: 15px;
@@ -27,6 +31,7 @@ label {
     color: #555555;
 }
 
+/* 🧩 Campos de entrada y selección */
 input[type="text"],
 input[type="number"],
 select {
@@ -36,8 +41,11 @@ select {
     border: 1px solid #cccccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-size: 15px;
+    background-color: #fdfdfd;
 }
 
+/* 🎯 Botón de envío */
 button {
     margin-top: 30px;
     width: 100%;
@@ -47,9 +55,12 @@ button {
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+/* 🎨 Efecto hover del botón */
 button:hover {
     background-color: #0056b3;
 }

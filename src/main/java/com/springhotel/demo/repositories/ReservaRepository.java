@@ -1,13 +1,14 @@
 package com.springhotel.demo.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.springhotel.demo.models.Reserva;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-
-// JpaRepository toma dos parámetros:
-// 1. La clase de la entidad (Reserva)
-// 2. El tipo de dato de la clave primaria (Long, que es idReserva)
+/**
+ * Repositorio para la entidad Reserva.
+ * Es la pieza central del negocio.
+ */
+@Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
-    // Listo: Spring crea automáticamente los métodos CRUD (save, findById, etc.)
+    // Por ahora solo necesitamos las operaciones CRUD estándar.
 }
-

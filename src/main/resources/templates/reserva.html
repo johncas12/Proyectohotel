@@ -2,43 +2,114 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Reserva</title>
     <link rel="stylesheet" href="/css/estilos.css">
     <link rel="stylesheet" th:href="@{/css/formulario-reserva.css}">
     <link rel="stylesheet" th:href="@{/css/lista-reservas.css}">
-
-
 </head>
 <body>
     <h2>Formulario de Reserva</h2>
     
+    <!-- Mensaje de error si existe -->
+    <div th:if="${param.error}" class="mensaje-error">
+        Debes seleccionar usuario y habitación.
+    </div>
 
     <form th:action="@{/procesar-reserva}" th:object="${reserva}" method="post">
-        <label>Fecha Check-in:</label>
-        <input type="date" th:field="*{fechaCheckin}" required><br>
+        
+        <!-- Selección de Usuario -->
+        <div class="campo-formulario">
+            <label for="usuario">Usuario: *</label>
+            <select id="usuario" name="usuarioId" required>
+                <option value="">-- Seleccione un usuario --</option>
+                <option th:each="usuario : ${usuarios}" 
+                        th:value="${usuario.idUsuario}" 
+                        th:text="${usuario.nombre + ' ' + usuario.apellido + ' (' + usuario.email + ')'}">
+                </option>
+            </select>
+        </div>
 
-        <label>Fecha Check-out:</label>
-        <input type="date" th:field="*{fechaCheckout}" required><br>
+        <!-- Selección de Habitación -->
+        <div class="campo-formulario">
+            <label for="habitacion">Habitación: *</label>
+            <select id="habitacion" name="habitacionId" required>
+                <option value="">-- Seleccione una habitación --</option>
+                <option th:each="habitacion : ${habitaciones}" 
+                        th:value="${habitacion.idHabitacion}" 
+                        th:text="${'Habitación ' + habitacion.numeroHabitacion + ' - ' + habitacion.tipoHabitacion + ' ($' + habitacion.precioPorNoche + '/noche)'}">
+                </option>
+            </select>
+        </div>
 
-        <label>Total de Huéspedes:</label>
-        <input type="number" th:field="*{totalHuespedes}" required><br>
+        <!-- Fecha Check-in -->
+        <div class="campo-formulario">
+            <label for="fechaCheckin">Fecha Check-in: *</label>
+            <input type="date" 
+                   id="fechaCheckin" 
+                   th:field="*{fechaCheckin}" 
+                   required
+                   th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+        </div>
 
-        <label>Precio Total:</label>
-        <input type="number" th:field="*{precioTotal}" step="0.01" required><br>
+        <!-- Fecha Check-out -->
+        <div class="campo-formulario">
+            <label for="fechaCheckout">Fecha Check-out: *</label>
+            <input type="date" 
+                   id="fechaCheckout" 
+                   th:field="*{fechaCheckout}" 
+                   required>
+        </div>
 
-        <label>Estado de la Reserva:</label>
-        <input type="text" th:field="*{estadoReserva}" required><br>
+        <!-- Total de Huéspedes -->
+        <div class="campo-formulario">
+            <label for="totalHuespedes">Total de Huéspedes: *</label>
+            <input type="number" 
+                   id="totalHuespedes" 
+                   th:field="*{totalHuespedes}" 
+                   min="1" 
+                   max="10" 
+                   required>
+        </div>
 
-        <label>Notas:</label>
-        <textarea th:field="*{notas}"></textarea><br>
+        <!-- Precio Total -->
+        <div class="campo-formulario">
+            <label for="precioTotal">Precio Total: *</label>
+            <input type="number" 
+                   id="precioTotal" 
+                   th:field="*{precioTotal}" 
+                   step="0.01" 
+                   min="0" 
+                   required>
+        </div>
 
-        <button type="submit">Confirmar Reserva</button>
+        <!-- Estado de la Reserva -->
+        <div class="campo-formulario">
+            <label for="estadoReserva">Estado de la Reserva: *</label>
+            <select id="estadoReserva" th:field="*{estadoReserva}" required>
+                <option value="">-- Seleccione un estado --</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Confirmada">Confirmada</option>
+                <option value="Cancelada">Cancelada</option>
+                <option value="Completada">Completada</option>
+            </select>
+        </div>
+
+        <!-- Notas -->
+        <div class="campo-formulario">
+            <label for="notas">Notas adicionales:</label>
+            <textarea id="notas" 
+                      th:field="*{notas}" 
+                      rows="4" 
+                      placeholder="Ingrese cualquier información adicional sobre la reserva..."></textarea>
+        </div>
+
+        <!-- Botones -->
+        <div class="botones-formulario">
+            <button type="submit" class="btn-confirmar">Confirmar Reserva</button>
+            <a th:href="@{/reservas}" class="btn-cancelar">Cancelar</a>
+        </div>
     </form>
-    <form action="/reservas/procesar" method="post"></form>
-
-    <div th:if="${param.error}" style="color:red;">
-  Debes seleccionar usuario y habitación.
-</div>
 
 </body>
 </html>

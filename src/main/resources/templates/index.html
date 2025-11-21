@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Hotel El Sol</title>
@@ -9,14 +9,14 @@
     <header>
         <h1>Bienvenida a Hotel El Sol</h1>
         <nav>
-            <a href="/reserva" class="boton">Reservar</a>
+ <!-- <a th:href="@{/reservas/formulario}" class="boton">Reservas</a> prueva con reservas nuevo-->
+            <a th:href="@{/reservas/nuevo}">Crear una nueva reserva</a>
             <a href="#" class="boton">Servicios</a>
             <a href="#" class="boton">Contacto</a>
         </nav>
     </header>
-
     <main>
-      <img src="/images/imagenhotel.jpg" alt="Fachada del Hotel El Sol">
+        <img src="/images/imagenhotel.jpg" alt="Fachada del Hotel El Sol">
         <section class="descripcion">
             <p>Disfrutá de una experiencia única en nuestro HOTEL EL SOL, con habitaciones de lujo, spa y atención personalizada.</p>
         </section>

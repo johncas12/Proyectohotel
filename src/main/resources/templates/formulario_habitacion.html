@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Formulario de Habitación</title>
     <link rel="stylesheet" th:href="@{/css/formulario-habitacion.css}">
 </head>
@@ -8,29 +9,31 @@
 <div class="container">
     <h1>Formulario de Habitación</h1>
     <form th:action="@{/habitaciones/guardar}" th:object="${habitacion}" method="post">
-        <label>Número de habitación:</label>
-        <input type="text" th:field="*{numeroHabitacion}" required />
+        <input type="hidden" th:field="*{idHabitacion}" />
+        <label for="numeroHabitacion">Número de habitación:</label>
+        <input type="text" id="numeroHabitacion" th:field="*{numeroHabitacion}" required />
 
-        <label>Tipo:</label>
-        <select th:field="*{tipo}" required>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" th:field="*{tipo}" required>
             <option value="">Seleccione un tipo</option>
             <option value="Individual">Individual</option>
             <option value="Doble">Doble</option>
             <option value="Suite">Suite</option>
         </select>
 
-        <label>Estado:</label>
-        <select th:field="*{estado}" required>
+        <label for="estado">Estado:</label>
+        <select id="estado" th:field="*{estado}" required>
+            <option value="">Seleccione estado</option>
             <option value="disponible">Disponible</option>
             <option value="ocupada">Ocupada</option>
             <option value="mantenimiento">Mantenimiento</option>
         </select>
 
-        <label>Capacidad:</label>
-        <input type="number" th:field="*{capacidad}" required />
+        <label for="capacidad">Capacidad:</label>
+        <input type="number" id="capacidad" th:field="*{capacidad}" min="1" required />
 
-        <label>Precio por noche:</label>
-        <input type="number" step="0.01" th:field="*{precioNoche}" required />
+        <label for="precioNoche">Precio por noche:</label>
+        <input type="number" id="precioNoche" th:field="*{precioNoche}" step="0.01" min="0" required />
 
         <button type="submit">Guardar</button>
     </form>

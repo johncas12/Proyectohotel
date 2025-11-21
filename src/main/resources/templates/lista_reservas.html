@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Reservas</title>
+    <link rel="stylesheet" th:href="@{/css/lista-reservas.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Reservas registradas</h1>
+      <!--  <a th:href="@{/reservas/formulario}">Crear nueva reserva</a> -->
+        <a th:href="@{/reservas/nuevo}">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Habitación</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reserva : ${reservas}">
+                    <td th:text="${reserva.idReserva}">1</td>
+                    <td th:text="${reserva.usuario != null ? reserva.usuario.nombre + ' ' + reserva.usuario.apellido : 'Sin cliente'}">Cliente</td>
+                    <td th:text="${reserva.habitacion != null ? reserva.habitacion.numeroHabitacion : 'Sin habitación'}">Hab</td>
+                    <td th:text="${reserva.fechaCheckin != null ? #dates.format(reserva.fechaCheckin, 'dd/MM/yyyy') : 'Sin fecha'}">01/01/2025</td>
+                    <td th:text="${reserva.fechaCheckout != null ? #dates.format(reserva.fechaCheckout, 'dd/MM/yyyy') : 'Sin fecha'}">02/01/2025</td>
+                    <td th:text="${reserva.estadoReserva != null ? reserva.estadoReserva : 'Sin estado'}">pendiente</td>
+                    <td>
+                        <a th:href="@{'/reservas/editar/' + ${reserva.idReserva}}">Editar</a>
+                        <a th:href="@{'/reservas/eliminar/' + ${reserva.idReserva}}"
+                           onclick="return confirm('¿Eliminar esta reserva?');">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
