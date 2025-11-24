@@ -1,44 +1,68 @@
 package com.springhotel.demo.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import com.springhotel.demo.models.TipoHabitacion; // Importación necesaria
+import java.io.Serializable;
 
-/**
- * 🔹 Entidad Habitacion
- * Define las características físicas y comerciales de la habitación.
- */
 @Entity
 @Table(name = "habitaciones")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Habitacion {
+public class Habitacion implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "id_habitacion")
-    private Long idHabitacion;
+    private Integer idHabitacion; // CLAVE PRIMARIA: Usar Integer (INT en DB)
 
-    // 🔒 El número es único y obligatorio.
-    @Column(name = "numero_habitacion", nullable = false, unique = true)
+    @Column(name = "numero_habitacion")
     private String numeroHabitacion;
 
-    @Column(name = "capacidad", nullable = false)
-    private int capacidad;
+    @Column(name = "estado")
+    private String estado;
+    
+    @Column(name = "capacidad")
+    private Integer capacidad;
+    
+    @Column(name = "precio_noche")
+    private Double precioNoche;
+    
+    // Relación ManyToOne
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_habitacion")
+    private TipoHabitacion tipoHabitacion; 
+    
+    @Column(name = "tipo")
+    private String tipo;
+    
+    @Column(name = "descripcion")
+    private String descripcion;
+    
+    @Column(name = "disponible")
+    private Boolean disponible;
+    
+    @Column(name = "precio")
+    private Double precio;
 
-    @Column(name = "precio_noche", nullable = false)
-    private double precioNoche;
+    public Habitacion() {}
 
-    @Column(name = "tipo", nullable = false)
-    private String tipo; // Ej: SIMPLE, DOBLE, SUITE
-
-    @Column(name = "estado", nullable = false)
-    private String estado; // Ej: DISPONIBLE, OCUPADA, LIMPIEZA
-
-    // Argumento de Defensa Académica:
-    // El uso de campos primitivos (int, double) con la restricción 'nullable = false'
-    // asegura que la entidad cumple con la atomicidad de datos y evita que la lógica
-    // de negocio dependa de valores nulos para datos esenciales como el precio o la capacidad.
+    // Getters y Setters...
+    public Integer getIdHabitacion() { return idHabitacion; }
+    public void setIdHabitacion(Integer idHabitacion) { this.idHabitacion = idHabitacion; }
+    public String getNumeroHabitacion() { return numeroHabitacion; }
+    public void setNumeroHabitacion(String numeroHabitacion) { this.numeroHabitacion = numeroHabitacion; }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
+    public Integer getCapacidad() { return capacidad; }
+    public void setCapacidad(Integer capacidad) { this.capacidad = capacidad; }
+    public Double getPrecioNoche() { return precioNoche; }
+    public void setPrecioNoche(Double precioNoche) { this.precioNoche = precioNoche; }
+    public TipoHabitacion getTipoHabitacion() { return tipoHabitacion; }
+    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) { this.tipoHabitacion = tipoHabitacion; }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public Boolean getDisponible() { return disponible; }
+    public void setDisponible(Boolean disponible) { this.disponible = disponible; }
+    public Double getPrecio() { return precio; }
+    public void setPrecio(Double precio) { this.precio = precio; }
 }

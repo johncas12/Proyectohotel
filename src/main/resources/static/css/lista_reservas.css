@@ -1,0 +1,133 @@
+/* src/main/resources/static/css/lista_reservas.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef; /* Fondo gris suave para contrastar con la tarjeta blanca */
+    margin: 0;
+    padding: 40px;
+    color: #495057;
+}
+
+.container {
+    max-width: 1200px; /* Hacemos el contenedor un poco más ancho */
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px; /* Bastante espacio interno (padding) */
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra elegante */
+}
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+/* --- Botones Superiores --- */
+.top-actions {
+    display: flex;
+    gap: 15px; /* Espacio entre los dos botones azules */
+    margin-bottom: 25px;
+}
+
+.btn-top {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-top:hover {
+    background-color: #0056b3;
+}
+
+/* --- Estilos de la Tabla --- */
+.tabla-reservas {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Encabezado Verde */
+.tabla-reservas thead tr {
+    background-color: #4CAF50; 
+    color: #ffffff;
+    text-align: left;
+}
+
+.tabla-reservas th {
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+}
+
+/* Celdas del cuerpo */
+.tabla-reservas td {
+    padding: 15px; /* Espacio interno generoso */
+    vertical-align: middle; /* Centrar contenido verticalmente */
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.95em;
+}
+
+/* Filas alternas (Zebra) */
+.tabla-reservas tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Gris muy claro */
+}
+.tabla-reservas tbody tr:hover {
+    background-color: #e8f5e9; /* Verde muy suave al pasar el mouse */
+}
+
+/* --- Mejoras de Distribución (Columnas específicas) --- */
+
+/* Columna Cliente: Evitar que el nombre se rompa demasiado */
+.col-cliente {
+    min-width: 160px; 
+    font-weight: bold;
+    color: #333;
+}
+
+/* Columna Precios y Números: Centrados */
+.text-center {
+    text-align: center;
+}
+
+/* Columna Acciones: Botones lado a lado */
+.acciones-group {
+    display: flex;
+    gap: 8px; /* Espacio entre Editar y Eliminar */
+    justify-content: flex-start; /* Alineados a la izquierda */
+}
+
+.btn-accion {
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+}
+
+.btn-editar {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}
+
+.btn-accion:hover {
+    opacity: 0.85;
+}

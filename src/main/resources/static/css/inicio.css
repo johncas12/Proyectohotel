@@ -1,48 +1,136 @@
+/* --- Estilos específicos para la página de inicio --- */
+
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #fff8f0;
+    background-color: #f0f2f5; /* Fondo más suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-header {
-    background-color: #ff8c00;
+.contenedor-principal {
+    width: 90%;
+    max-width: 1000px; /* Ancho máximo para el contenido */
+    background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px auto;
+    overflow: hidden; /* Asegura que los bordes redondeados se vean bien */
+}
+
+/* 1. Encabezado y Logo */
+.encabezado-inicio {
+    background-color: #ff8c00; /* Naranja fuerte */
     color: white;
-    padding: 20px;
+    padding: 20px 0;
     text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-nav {
-    margin-top: 10px;
+.logo-container {
+    margin-bottom: 15px; /* Espacio debajo del logo */
 }
 
-.boton {
-    background-color: #008080;
-    color: white;
+.logo-hotel {
+    max-width: 70px; /* Tamaño del logo */
+    height: auto;
+    border-radius: 50%; /* Opcional: para un logo circular */
+    border: 3px solid #fff; /* Pequeño borde blanco alrededor del logo */
+}
+
+.encabezado-inicio h1 {
+    font-size: 2.5em;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* 2. Navegación (Botones) */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 0;
+    background-color: #f8f9fa; /* Fondo ligeramente diferente para la nav */
+    border-bottom: 1px solid #e9ecef;
+    flex-wrap: wrap; /* Para que los botones se ajusten en pantallas pequeñas */
+}
+
+.boton-nav {
+    display: inline-block;
     padding: 10px 20px;
-    margin: 5px;
+    background-color: #28a745; /* Verde esmeralda */
+    color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.boton:hover {
-    background-color: #006666;
+.boton-nav:hover {
+    background-color: #218838; /* Verde más oscuro */
+    transform: translateY(-2px);
 }
 
-main {
-    text-align: center;
+/* 3. Contenido Central (Imagen y Mensaje) */
+.contenido-central {
     padding: 30px;
+    text-align: center;
 }
 
-img {
-    max-width: 90%;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+.imagen-container {
+    background-color: white; /* Borde visual alrededor de la imagen */
+    padding: 10px;
+    border-radius: 15px; /* Bordes redondeados para el contenedor de la imagen */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: inline-block; /* Para que el padding y shadow se ajusten a la imagen */
+    margin-bottom: 25px;
 }
 
-.descripcion {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
+.imagen-balcon {
+    max-width: 100%; /* Ajusta la imagen al ancho de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 10px; /* Bordes redondeados para la imagen misma */
+    display: block; /* Elimina espacio extra debajo de la imagen */
+}
+
+.mensaje-inferior {
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 768px) {
+    .encabezado-inicio h1 {
+        font-size: 2em;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .boton-nav {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .encabezado-inicio h1 {
+        font-size: 1.5em;
+    }
+    .logo-hotel {
+        max-width: 100px;
+    }
+    .mensaje-inferior {
+        font-size: 0.95em;
+    }
 }

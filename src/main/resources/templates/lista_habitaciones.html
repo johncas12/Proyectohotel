@@ -2,40 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Habitaciones</title>
-    <link rel="stylesheet" th:href="@{/css/lista-habitaciones.css}">
+    <title>Gestión de Habitaciones</title>
+    
+    <link rel="stylesheet" th:href="@{/css/lista_habitaciones.css}">
+    
 </head>
 <body>
-<div class="container">
-    <h1>Lista de Habitaciones</h1>
-    <a th:href="@{/habitaciones/formulario}" class="btn-nueva">+ Nueva habitación</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Tipo</th>
-                <th>Estado</th>
-                <th>Capacidad</th>
-                <th>Precio</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="habitacion : ${habitaciones}">
-                <td th:text="${habitacion.numeroHabitacion}"></td>
-                <td th:text="${habitacion.tipo}"></td>
-                <td th:text="${habitacion.estado}"></td>
-                <td th:text="${habitacion.capacidad}"></td>
-                <td th:text="'$' + ${#numbers.formatDecimal(habitacion.precioNoche, 1, 'POINT', 2, 'POINT')}"></td>
-                <td>
-                    <a th:href="@{'/habitaciones/editar/' + ${habitacion.idHabitacion}}">Editar</a>
-                    <a th:href="@{'/habitaciones/eliminar/' + ${habitacion.idHabitacion}}"
-                       onclick="return confirm('¿Eliminar esta habitación?')">Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+    <div class="container">
+        <h1>Hotel El Sol</h1>
+        <h2>Inventario de Habitaciones</h2>
+
+        <div class="top-actions">
+            <a th:href="@{/habitaciones/nuevo}" class="btn-nuevo">
+                + Nueva Habitación
+            </a>
+        </div>
+
+        <table class="tabla-gestion">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Capacidad</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="h : ${habitaciones}">
+                    <td th:text="${h.numeroHabitacion}">101</td>
+                    
+                    <td th:text="${h.tipoHabitacion.nombreTipo}">Estándar</td>
+                    
+                    <td>
+                        <span th:text="${h.estado}" 
+                              th:class="${h.estado == 'Disponible' ? 'estado-disponible' : 'estado-ocupada'}">
+                              Disponible
+                        </span>
+                    </td>
+                    
+                    <td th:text="${h.capacidad + ' pers.'}">2 pers.</td>
+                    <td th:text="${'$ ' + h.precioNoche}">$ 80.000</td>
+                    
+                    <td>
+                        <div class="acciones-group">
+                            <a th:href="@{/habitaciones/editar/{id}(id=${h.idHabitacion})}" 
+                               class="btn-accion btn-editar">Editar</a>
+                            
+                            <a th:href="@{/habitaciones/eliminar/{id}(id=${h.idHabitacion})}" 
+                               class="btn-accion btn-eliminar"
+                               onclick="return confirm('¿Confirma eliminar esta habitación?');">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/}" class="link-volver">&larr; Volver al Inicio</a>
+    </div>
+
 </body>
 </html>
-

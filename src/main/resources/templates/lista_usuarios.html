@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/lista_usuarios.css}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Hotele El Sol</h1>
+        <h2>Listado de Usuarios</h2>
+        
+        <div class="top-actions">
+            <a th:href="@{/usuarios/nuevo}" class="btn-top">Crear Nuevo Usuario</a>
+            <a th:href="@{/}" class="btn-top">Volver al Inicio</a>
+        </div>
+
+        <table class="tabla-usuarios">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">ID</th>
+                    <th style="width: 12%;">Nombre</th>
+                    <th style="width: 12%;">Apellido</th>
+                    <th style="width: 20%;">Email</th> <th style="width: 10%;">Teléfono</th>
+                    <th style="width: 10%;">Tipo</th>
+                    <th style="width: 10%;">Fecha Reg.</th>
+                    <th style="width: 15%;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">1</td>
+                    
+                    <td class="col-nombre" th:text="${usuario.nombre}">John</td>
+                    
+                    <td style="white-space: nowrap;" th:text="${usuario.apellido}">Castillo Torres</td>
+                    
+                    <td class="col-email" th:text="${usuario.email}">john@email.com</td>
+                    
+                    <td th:text="${usuario.telefono}">123456</td>
+                    
+                    <td th:text="${usuario.tipoUsuario != null ? usuario.tipoUsuario : '-'}">Cliente</td>
+                    
+                    <td th:text="${usuario.fechaRegistro != null ? #dates.format(usuario.fechaRegistro, 'dd/MM/yyyy') : '-'}">
+                        01/01/2025
+                    </td>
+                    
+                    <td>
+                        <div class="acciones-group">
+                            <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn-accion btn-editar">
+                                Editar
+                            </a>
+                            <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.id})}" class="btn-accion btn-eliminar"
+                               onclick="return confirm('¿Eliminar usuario?');">
+                                Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

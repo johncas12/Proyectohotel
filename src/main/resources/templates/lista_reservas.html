@@ -2,44 +2,73 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Reservas</title>
-    <link rel="stylesheet" th:href="@{/css/lista-reservas.css}">
+    <title>Reservas Registradas</title>
+    <link rel="stylesheet" th:href="@{/css/lista_reservas.css}">
 </head>
 <body>
-    <div class="container">
-        <h1>Reservas registradas</h1>
-      <!--  <a th:href="@{/reservas/formulario}">Crear nueva reserva</a> -->
-        <a th:href="@{/reservas/nuevo}">
 
-        <table>
+    <div class="container">
+        <h1>Hotel el Sol</h1>
+        <h2>Reservas Registradas</h2>
+        
+        <div class="top-actions">
+            <a th:href="@{/reservas/nuevo}" class="btn-top">Crear Nueva Reserva</a>
+            <a th:href="@{/}" class="btn-top">Volver al Inicio</a>
+        </div>
+
+        <table class="tabla-reservas">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Cliente</th>
-                    <th>Habitación</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th style="width: 5%;">ID</th>
+                    <th style="width: 20%;">Cliente</th>
+                    <th style="width: 10%;">Habitación</th>
+                    <th style="width: 12%;">Check In</th>
+                    <th style="width: 12%;">Check Out</th>
+                    <th class="text-center" style="width: 8%;">Huéspedes</th>
+                    <th style="width: 10%;">Total</th>
+                    <th style="width: 10%;">Estado</th>
+                    <th style="width: 13%;">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="reserva : ${reservas}">
-                    <td th:text="${reserva.idReserva}">1</td>
-                    <td th:text="${reserva.usuario != null ? reserva.usuario.nombre + ' ' + reserva.usuario.apellido : 'Sin cliente'}">Cliente</td>
-                    <td th:text="${reserva.habitacion != null ? reserva.habitacion.numeroHabitacion : 'Sin habitación'}">Hab</td>
-                    <td th:text="${reserva.fechaCheckin != null ? #dates.format(reserva.fechaCheckin, 'dd/MM/yyyy') : 'Sin fecha'}">01/01/2025</td>
-                    <td th:text="${reserva.fechaCheckout != null ? #dates.format(reserva.fechaCheckout, 'dd/MM/yyyy') : 'Sin fecha'}">02/01/2025</td>
-                    <td th:text="${reserva.estadoReserva != null ? reserva.estadoReserva : 'Sin estado'}">pendiente</td>
+                    <td th:text="${reserva.idReserva}" style="font-weight: bold;">11</td>
+                    
+                    <td class="col-cliente" th:text="${reserva.usuario.nombre + ' ' + reserva.usuario.apellido}">
+                        John Castillo
+                    </td>
+                    
+                    <td th:text="${reserva.habitacion.numeroHabitacion}">101</td>
+                    
+                    <td th:text="${#dates.format(reserva.fechaCheckin, 'dd/MM/yyyy')}">24/11/2025</td>
+                    <td th:text="${#dates.format(reserva.fechaCheckout, 'dd/MM/yyyy')}">25/11/2025</td>
+                    
+                    <td class="text-center" th:text="${reserva.totalHuespedes}">4</td>
+                    
+                    <td th:text="${'$ ' + reserva.precioTotal}">$ 300000.0</td>
+                    
                     <td>
-                        <a th:href="@{'/reservas/editar/' + ${reserva.idReserva}}">Editar</a>
-                        <a th:href="@{'/reservas/eliminar/' + ${reserva.idReserva}}"
-                           onclick="return confirm('¿Eliminar esta reserva?');">Eliminar</a>
+                        <span th:text="${reserva.estadoReserva}" 
+                              style="padding: 4px 8px; background: #eee; border-radius: 4px; font-size: 0.9em;">
+                            Pendiente
+                        </span>
+                    </td>
+                    
+                    <td>
+                        <div class="acciones-group">
+                            <a th:href="@{/reservas/editar/{id}(id=${reserva.idReserva})}" class="btn-accion btn-editar">
+                                Editar
+                            </a>
+                            <a th:href="@{/reservas/eliminar/{id}(id=${reserva.idReserva})}" class="btn-accion btn-eliminar"
+                               onclick="return confirm('¿Eliminar reserva?');">
+                                Eliminar
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
 </body>
 </html>
-

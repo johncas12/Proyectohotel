@@ -3,14 +3,16 @@ package com.springhotel.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Clase principal de arranque de la aplicación Spring Boot.
- * Mantenerla en el paquete raíz "com.springhotel.demo" para que el escaneo de componentes detecte
- * controllers, repositorios y servicios dentro de subpaquetes.
- */
 @SpringBootApplication
 public class DemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
+
+	/**
+	 * Sustentación: Método principal (main) de la aplicación.
+	 * SpringApplication.run() inicializa el contexto de Spring, escanea los paquetes 
+	 * para encontrar componentes (@Controller, @Service, @Repository) y arranca el servidor web embebido (Tomcat).
+	 */
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
 }

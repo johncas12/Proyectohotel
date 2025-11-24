@@ -2,24 +2,36 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Hotel El Sol</title>
-    <link rel="stylesheet" href="/css/inicio.css">
+    <title>Hotel El Sol - Gestión</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/css/inicio.css}"> 
 </head>
 <body>
-    <header>
-        <h1>Bienvenida a Hotel El Sol</h1>
-        <nav>
- <!-- <a th:href="@{/reservas/formulario}" class="boton">Reservas</a> prueva con reservas nuevo-->
-            <a th:href="@{/reservas/nuevo}">Crear una nueva reserva</a>
-            <a href="#" class="boton">Servicios</a>
-            <a href="#" class="boton">Contacto</a>
+    <div class="contenedor-principal">
+        
+        <header class="encabezado-inicio">
+            <div class="logo-container">
+                <img th:src="@{/images/logohotel.jpg}" alt="Logo Hotel El Sol" class="logo-hotel"/>
+            </div>
+            <h1>Bienvenido al Sistema de Gestión Hotel El Sol</h1>
+        </header>
+
+        <nav class="nav-links">
+            <a th:href="@{/reservas}" class="boton-nav">Reservas Registradas</a>
+            <a th:href="@{/reservas/nuevo}" class="boton-nav">Nueva Reserva</a>
+            <a th:href="@{/usuarios}" class="boton-nav">Gestión Usuarios</a>
+            <a th:href="@{/habitaciones}" class="boton-nav">Gestión Habitaciones</a>
         </nav>
-    </header>
-    <main>
-        <img src="/images/imagenhotel.jpg" alt="Fachada del Hotel El Sol">
-        <section class="descripcion">
-            <p>Disfrutá de una experiencia única en nuestro HOTEL EL SOL, con habitaciones de lujo, spa y atención personalizada.</p>
+
+        <section class="contenido-central">
+            <div class="imagen-container">
+                <img th:src="@{/images/imagenhotel.jpg}" alt="Imagen Hotel" class="imagehotel"/>
+            </div>
+            <p class="mensaje-inferior">
+                Disfruta de una experiencia única en nuestro HOTEL EL SOL con habitaciones de lujo, spa y atención personalizada.
+            </p>
         </section>
-    </main>
+        
+    </div>
 </body>
 </html>

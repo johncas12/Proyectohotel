@@ -1,0 +1,130 @@
+/* src/main/resources/static/css/lista_usuarios.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; /* Fondo gris claro moderno */
+    margin: 0;
+    padding: 40px;
+    color: #444;
+}
+
+.container {
+    max-width: 1300px; /* Más ancho para que quepa el email y teléfono */
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* --- Botones Superiores --- */
+.top-actions {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-top {
+    background-color: #007bff; /* Azul estándar */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-top:hover {
+    background-color: #0056b3;
+}
+
+/* --- Tabla de Usuarios --- */
+.tabla-usuarios {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.95em;
+}
+
+/* Encabezado */
+.tabla-usuarios thead tr {
+    background-color: #4CAF50; /* Tu verde original */
+    color: #ffffff;
+    text-align: left;
+}
+
+.tabla-usuarios th {
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Evita que el título se rompa */
+}
+
+/* Celdas */
+.tabla-usuarios td {
+    padding: 12px 15px;
+    vertical-align: middle; /* Alineación vertical centrada */
+    border-bottom: 1px solid #e9ecef;
+    color: #333;
+}
+
+/* Filas alternas */
+.tabla-usuarios tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-usuarios tbody tr:hover {
+    background-color: #e8f5e9; /* Verde muy suave al pasar el mouse */
+}
+
+/* --- Columnas Específicas --- */
+.col-email {
+    font-family: monospace; /* Fuente monoespaciada para emails ayuda a la lectura */
+    color: #0056b3;
+}
+
+.col-nombre {
+    font-weight: bold;
+}
+
+/* --- Botones de Acción (Lado a Lado) --- */
+.acciones-group {
+    display: flex;
+    gap: 5px; /* Espacio pequeño entre botones */
+    justify-content: flex-start;
+}
+
+.btn-accion {
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+.btn-editar {
+    background-color: #28a745; /* Verde */
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Rojo */
+}
+
+.btn-accion:hover {
+    opacity: 0.85;
+}
